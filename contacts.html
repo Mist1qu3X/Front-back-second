@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Личный сайт студента</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-code"></i> Турдахунов Руслан
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="diary.html">Дневник</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header py-4">
+        <div class="container">
+            <h1 class="text-center">Свяжитесь со мной</h1>
+        </div>
+    </section>
+
+    <!-- Контактная форма и информация -->
+    <section class="contacts-section py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Контактная форма -->
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="mb-0">Форма обратной связи</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Имя</label>
+                                    <input type="text" class="form-control" id="contactName" required>
+                                    <div class="invalid-feedback">Пожалуйста, введите ваше имя</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" required>
+                                    <div class="invalid-feedback">Пожалуйста, введите корректный email</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactMessage" class="form-label">Сообщение</label>
+                                    <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                                    <div class="invalid-feedback">Пожалуйста, введите ваше сообщение</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Контактная информация -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="mb-0">Контакты</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="contact-info mb-3">
+                                <i class="fas fa-envelope me-2"></i>
+                                <span>turdakhunov.r.i@edu.mirea.ru</span>
+                            </div>
+                            <div class="contact-info mb-3">
+                                <i class="fab fa-github me-2"></i>
+                                <span>GitHub: Mist1qu3X</span>
+                            </div>
+                            <div class="contact-info mb-3">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>Москва, Россия</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 Турдахунов</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
