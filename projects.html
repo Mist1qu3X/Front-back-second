@@ -27,12 +27,13 @@
 <body>
     <div class="page-container">
         <!-- Навигация -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <i class="fas fa-code"></i> Турдахунов Руслан
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-expanded="false" aria-controls="navbarNav" aria-label="Переключить навигацию">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -41,10 +42,13 @@
                             <a class="nav-link" href="index.html">Главная</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="projects.html">Проекты</a>
+                            <a class="nav-link active" href="projects.html" aria-current="page">Проекты</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="diary.html">Дневник</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gallery.html">Галерея</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contacts.html">Контакты</a>
@@ -66,10 +70,10 @@
             <section class="filters-section py-3 bg-light">
                 <div class="container">
                     <div class="d-flex justify-content-center flex-wrap">
-                        <button class="btn btn-outline-primary m-1 filter-btn active" data-filter="all">Все</button>
-                        <button class="btn btn-outline-primary m-1 filter-btn" data-filter="html">HTML</button>
-                        <button class="btn btn-outline-primary m-1 filter-btn" data-filter="js">JavaScript</button>
-                        <button class="btn btn-outline-primary m-1 filter-btn" data-filter="react">React</button>
+                        <button class="btn btn-outline-primary m-1 filter-btn btn-animated active" data-filter="all">Все</button>
+                        <button class="btn btn-outline-primary m-1 filter-btn btn-animated" data-filter="html">HTML</button>
+                        <button class="btn btn-outline-primary m-1 filter-btn btn-animated" data-filter="js">JavaScript</button>
+                        <button class="btn btn-outline-primary m-1 filter-btn btn-animated" data-filter="react">React</button>
                     </div>
                 </div>
             </section>
@@ -104,9 +108,9 @@
                     <!-- Контент модального окна будет добавлен через JavaScript -->
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="projectLiveLink" target="_blank">Живая версия</a>
-                    <a href="#" class="btn btn-outline-primary" id="projectCodeLink" target="_blank">Исходный код</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <a href="#" class="btn btn-primary btn-animated" id="projectLiveLink" target="_blank">Живая версия</a>
+                    <a href="#" class="btn btn-outline-primary btn-animated" id="projectCodeLink" target="_blank">Исходный код</a>
+                    <button type="button" class="btn btn-secondary btn-animated" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </div>
         </div>

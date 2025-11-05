@@ -10,12 +10,13 @@
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Основная навигация">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-code"></i> Турдахунов Руслан
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-expanded="false" aria-controls="navbarNav" aria-label="Переключить навигацию">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -27,7 +28,10 @@
                         <a class="nav-link" href="projects.html">Проекты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="diary.html">Дневник</a>
+                        <a class="nav-link active" href="diary.html" aria-current="page">Дневник</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Галерея</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacts.html">Контакты</a>
@@ -53,10 +57,10 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="mb-0">Записи дневника</h3>
-                            <button class="btn btn-outline-warning btn-sm me-2" id="clearDiaryBtn">
+                            <button class="btn btn-outline-warning btn-sm me-2 btn-animated" id="clearDiaryBtn">
                                 <i class="fas fa-broom"></i> Очистить всё
                             </button>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                            <button class="btn btn-primary btn-animated" data-bs-toggle="modal" data-bs-target="#addEntryModal">
                                 <i class="fas fa-plus"></i> Добавить запись
                             </button>
                         </div>
@@ -81,7 +85,7 @@
                                     <span>90%</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 90%"></div>
+                                    <div class="progress-bar progress-bar-animated" style="width: 90%"></div>
                                 </div>
                             </div>
                             <div class="course-progress mb-3">
@@ -90,7 +94,7 @@
                                     <span>70%</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 70%"></div>
+                                    <div class="progress-bar progress-bar-animated" style="width: 70%"></div>
                                 </div>
                             </div>
                             <div class="course-progress mb-3">
@@ -99,7 +103,7 @@
                                     <span>50%</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 50%"></div>
+                                    <div class="progress-bar progress-bar-animated" style="width: 50%"></div>
                                 </div>
                             </div>
                         </div>
@@ -149,8 +153,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" id="saveEntryBtn">Сохранить</button>
+                    <button type="button" class="btn btn-secondary btn-animated" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary btn-animated" id="saveEntryBtn">Сохранить</button>
                 </div>
             </div>
         </div>

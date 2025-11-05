@@ -123,6 +123,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('contactForm')) {
         initContactsPage();
     }
+    
+    // Новая инициализация интерактивных элементов
+    initInteractiveElements();
+    addIconInteractions();
+    enhanceDiaryEntries();
+    enhanceProjectFilters();
 });
 
 // Функции для страницы проектов
@@ -162,7 +168,7 @@ function createProjectCard(project) {
     col.className = 'col-md-6 col-lg-4 mb-4';
     
     col.innerHTML = `
-        <div class="card project-card-page h-100" data-project-id="${project.id}">
+        <div class="card project-card-page project-card-enhanced h-100" data-project-id="${project.id}">
             <img src="${project.images[0]}" class="card-img-top project-image" alt="${project.title}">
             <div class="card-body">
                 <h5 class="card-title">${project.title}</h5>
@@ -255,10 +261,10 @@ function createDiaryEntry(entry) {
         <p class="text-muted mb-2">${formattedDate}</p>
         <p class="mb-0">${entry.description}</p>
         <div class="mt-2">
-            <button class="btn btn-sm btn-outline-primary edit-entry me-2" data-entry-id="${entry.id}">
+            <button class="btn btn-sm btn-outline-primary edit-entry me-2 btn-animated" data-entry-id="${entry.id}">
                 <i class="fas fa-edit"></i> Редактировать
             </button>
-            <button class="btn btn-sm btn-outline-danger delete-entry" data-entry-id="${entry.id}">
+            <button class="btn btn-sm btn-outline-danger delete-entry btn-animated" data-entry-id="${entry.id}">
                 <i class="fas fa-trash"></i> Удалить
             </button>
         </div>
@@ -391,44 +397,55 @@ function editDiaryEntry(entryId) {
 
 // Функции для страницы контактов
 function initContactsPage() {
-    document.getElementById('contactForm').addEventListener('submit', handleContactFormSubmit);
-}
-
-function handleContactFormSubmit(event) {
-    event.preventDefault();
-    
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const message = document.getElementById('contactMessage').value;
-    
-    // Простая валидация
-    let isValid = true;
-    
-    if (!name) {
-        document.getElementById('contactName').classList.add('is-invalid');
-        isValid = false;
-    } else {
-        document.getElementById('contactName').classList.remove('is-invalid');
-    }
-    
-    if (!email || !isValidEmail(email)) {
-        document.getElementById('contactEmail').classList.add('is-invalid');
-        isValid = false;
-    } else {
-        document.getElementById('contactEmail').classList.remove('is-invalid');
-    }
-    
-    if (!message) {
-        document.getElementById('contactMessage').classList.add('is-invalid');
-        isValid = false;
-    } else {
-        document.getElementById('contactMessage').classList.remove('is-invalid');
-    }
-    
-    if (isValid) {
-        // В реальном приложении здесь был бы код для отправки данных на сервер
-        showNotification('Сообщение отправлено! Я свяжусь с вами в ближайшее время.', 'success');
-        document.getElementById('contactForm').reset();
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            // Простая валидация
+            let isValid = true;
+            
+            if (!name) {
+                document.getElementById('contactName').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('contactName').classList.remove('is-invalid');
+            }
+            
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('contactEmail').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('contactEmail').classList.remove('is-invalid');
+            }
+            
+            if (!message) {
+                document.getElementById('contactMessage').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('contactMessage').classList.remove('is-invalid');
+            }
+            
+            if (isValid) {
+                showFormLoader(this, true); // Включаем лоадер
+                
+                // Имитация отправки
+                setTimeout(() => {
+                    showFormLoader(this, false); // Выключаем лоадер
+                    showNotification('Сообщение отправлено! Я свяжусь с вами в ближайшее время.', 'success');
+                    this.reset();
+                    
+                    // Убираем классы валидации
+                    document.getElementById('contactName').classList.remove('is-valid');
+                    document.getElementById('contactEmail').classList.remove('is-valid');
+                    document.getElementById('contactMessage').classList.remove('is-valid');
+                }, 2000);
+            }
+        });
     }
 }
 
@@ -479,6 +496,214 @@ function showNotification(message, type) {
     });
 }
 
+// Функции для практической работы 15
+
+// Инициализация интерактивных элементов после загрузки DOM
+function initInteractiveElements() {
+    addButtonAnimations();
+    addCardAnimations();
+    addScrollAnimations();
+    addFormInteractions();
+    addNavigationEffects();
+    initializeProgressBars();
+}
+
+// Анимация кнопок
+function addButtonAnimations() {
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.classList.add('btn-animated');
+        
+        // Добавляем эффект пульсации для основных кнопок
+        if (button.classList.contains('btn-primary')) {
+            button.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 0 20px rgba(52, 152, 219, 0.5)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
+            });
+        }
+    });
+}
+
+// Анимация карточек
+function addCardAnimations() {
+    const projectCards = document.querySelectorAll('.project-card, .project-card-page');
+    projectCards.forEach(card => {
+        card.classList.add('project-card-enhanced');
+        
+        // Добавляем эффект при клике
+        card.addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+}
+
+// Анимация при скролле
+function addScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.skill-item, .project-card, .diary-entry');
+    
+    animatedElements.forEach(element => {
+        element.classList.add('fade-in-up');
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Интерактивные формы
+function addFormInteractions() {
+    const formInputs = document.querySelectorAll('.form-control');
+    
+    formInputs.forEach(input => {
+        // Эффект при фокусе
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+        
+        // Валидация в реальном времени
+        input.addEventListener('input', function() {
+            if (this.checkValidity()) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            } else {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+            }
+        });
+    });
+}
+
+// Эффекты навигации
+function addNavigationEffects() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Добавляем небольшую задержку для плавного перехода
+            e.preventDefault();
+            const target = this.getAttribute('href');
+            
+            setTimeout(() => {
+                window.location.href = target;
+            }, 300);
+        });
+    });
+}
+
+// Анимация прогресс-баров - ИСПРАВЛЕННАЯ
+function initializeProgressBars() {
+    const progressBars = document.querySelectorAll('.progress-bar-animated');
+    
+    // Сохраняем оригинальные значения ширины
+    progressBars.forEach(bar => {
+        const originalWidth = bar.style.width;
+        bar.setAttribute('data-original-width', originalWidth);
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const originalWidth = bar.getAttribute('data-original-width');
+                
+                // Запускаем анимацию
+                setTimeout(() => {
+                    bar.classList.add('animate');
+                    bar.style.width = originalWidth;
+                }, 100);
+                
+                // Останавлим наблюдение после анимации
+                observer.unobserve(bar);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    progressBars.forEach(bar => {
+        observer.observe(bar);
+    });
+}
+
+// Интерактивные иконки
+function addIconInteractions() {
+    const icons = document.querySelectorAll('.fas, .fab');
+    icons.forEach(icon => {
+        icon.classList.add('icon-hover');
+    });
+}
+
+// Дополнительные интерактивные элементы для дневника
+function enhanceDiaryEntries() {
+    const diaryEntries = document.querySelectorAll('.diary-entry');
+    
+    diaryEntries.forEach(entry => {
+        // Показ подробной информации при клике
+        entry.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('btn')) {
+                this.classList.toggle('expanded');
+            }
+        });
+    });
+}
+
+// Интерактивные фильтры проектов
+function enhanceProjectFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Анимация переключения
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+}
+
+// Дополнительная функция для плавного скролла
+function smoothScrollTo(target) {
+    const element = document.querySelector(target);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// Интерактивный лоадер для форм - ИСПРАВЛЕННАЯ
+function showFormLoader(form, show = true) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    if (show) {
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+        submitBtn.disabled = true;
+    } else {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
 // Статистика для дневника (дополнительная функция)
 function getDiaryStats() {
     const totalEntries = diaryEntries.length;
@@ -526,3 +751,69 @@ function importDiaryData(file) {
     };
     reader.readAsText(file);
 }
+
+// ===== ПРАКТИЧЕСКАЯ РАБОТА 15 - МИНИМАЛЬНЫЕ ИЗМЕНЕНИЯ =====
+
+// Функции для практической работы 15
+function initPracticalWork15() {
+    console.log('Практическая работа 15 инициализирована');
+    
+    // 1. Skip-link функциональность
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+        skipLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.setAttribute('tabindex', '-1');
+                target.focus();
+                setTimeout(() => target.removeAttribute('tabindex'), 1000);
+            }
+        });
+    }
+    
+    // 2. Добавляем улучшенный фокус для форм
+    const formInputs = document.querySelectorAll('input, textarea, select');
+    formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.outline = '3px solid #3498db';
+            this.style.outlineOffset = '2px';
+        });
+        input.addEventListener('blur', function() {
+            this.style.outline = '';
+            this.style.outlineOffset = '';
+        });
+    });
+    
+    // 3. Ленивая загрузка изображений (кроме героя)
+    const images = document.querySelectorAll('img:not(.hero-section img)');
+    images.forEach(img => {
+        if (!img.loading) {
+            img.loading = 'lazy';
+        }
+    });
+}
+
+// Добавляем вызов в конец вашего DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Ваш существующий код...
+    if (document.getElementById('projects-container')) {
+        initProjectsPage();
+    }
+    
+    if (document.getElementById('diary-entries')) {
+        initDiaryPage();
+    }
+    
+    if (document.getElementById('contactForm')) {
+        initContactsPage();
+    }
+    
+    initInteractiveElements();
+    addIconInteractions();
+    enhanceDiaryEntries();
+    enhanceProjectFilters();
+    
+    // ✅ ДОБАВЛЯЕМ практическую работу 15 в самом конце
+    setTimeout(initPracticalWork15, 100);
+});
